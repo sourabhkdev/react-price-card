@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import priceCardDetails from "./priceCardConfig";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="pricing-table">
+      {priceCardDetails.map((priceCard, index) => (
+        <div
+          className={`${
+            priceCard?.isRecommended ? "price-card recommended" : "price-card"
+          }`}
         >
-          Learn React
-        </a>
-      </header>
+          <h2>{priceCard?.planCategory}</h2>
+          <p className="price">{priceCard?.planPrice}</p>
+          <ul>
+            {priceCard?.planFeatures.map((feature, index) => (
+              <li key={index}>{feature}</li>
+            ))}
+          </ul>
+          <button>{priceCard?.buyNow}</button>
+        </div>
+      ))}
     </div>
   );
 }
